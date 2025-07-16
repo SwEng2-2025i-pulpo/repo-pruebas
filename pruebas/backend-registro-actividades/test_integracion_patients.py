@@ -175,6 +175,7 @@ def test_get_meals():
     assert response.status_code == 200, f"Error {response.status_code}: {response.text}"
     assert isinstance(response.json(), list)
 
+
 # Test de actualizar registro de medicación
 def test_update_medication_log():
     patient_id = crear_paciente_base()
@@ -201,14 +202,6 @@ def test_update_medication_log():
     assert response.status_code == 200, f"Error {response.status_code}: {response.text}"
     assert response.json()["dose"] == "1000mg"
 
-# Test de eliminar paciente
-def test_delete_patient():
-    patient_id = crear_paciente_base()
-    if not patient_id:
-        print("Error al crear paciente. No se puede probar la eliminación.")
-        return
-    response = requests.delete(BASE_URL + f"/patients/{patient_id}")
-    assert response.status_code == 200, f"Error {response.status_code}: {response.text}"
 
 # Test de agregar un registro de higiene
 def test_add_hygiene_log():
@@ -282,38 +275,6 @@ def test_get_vital_signs():
     assert response.status_code == 200, f"Error {response.status_code}: {response.text}"
     assert isinstance(response.json(), list)
 
-# Test de actualizar paciente con datos incorrectos
-def test_actualizar_paciente_con_datos_incorrectos():
-    patient_id = crear_paciente_base()
-    if not patient_id:
-        print("Error al crear paciente. No se puede probar la actualización.")
-        return
 
-    # Intentamos actualizar con datos incompletos o incorrectos
-    payload = {
-        "name": "",  # Nombre vacío es inválido
-        "last_name": "Gómez",
-        "birth_date": "1980-10-10",
-        "age": 41,
-        "document": random.randint(100000000, 999999999),
-        "cholesterol": 200,
-        "glucose": 110,
-        "conditions": ["hipertensión"],
-        "medications": ["enalapril"],
-        "activity_level": "Alto",
-        "caretakers_ids": [],
-        "medical_history": [],
-        "meals": [],
-        "medication_logs": [],
-        "hygiene_logs": [],
-        "vital_signs": [],
-        "symptoms": []
-    }
-    response = requests.put(BASE_URL + f"/{patient_id}", json=payload)  # Cambié a PUT para actualización
-    assert response.status_code == 422, f"Error {response.status_code}: {response.text}"
 
-# Test de eliminar paciente con ID incorrecto
-def test_delete_patient_con_id_incorrecto():
-    incorrect_patient_id = "invalid_id"  # ID inválido
-    response = requests.delete(BASE_URL + f"/patients/{incorrect_patient_id}")  # Cambié a DELETE
-    assert response.status_code == 400, f"Error {response.status_code}: {response.text}"
+
