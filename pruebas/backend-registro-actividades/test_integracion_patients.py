@@ -174,3 +174,146 @@ def test_get_meals():
     response = requests.get(BASE_URL + f"/{patient_id}/meals")
     assert response.status_code == 200, f"Error {response.status_code}: {response.text}"
     assert isinstance(response.json(), list)
+
+# Test de actualizar registro de medicación
+def test_update_medication_log():
+    patient_id = crear_paciente_base()
+    if not patient_id:
+        print("Error al crear paciente. No se puede probar la actualización de medicación.")
+        return
+    # Crear un registro de medicación
+    payload = {
+        "datetime": datetime.now().isoformat(),
+        "medication_name": "Paracetamol",
+        "dose": "500mg",
+        "route": "oral",
+        "status": "administrado",
+        "observations": "Sin efectos secundarios"
+    }
+    response = requests.post(BASE_URL + f"/{patient_id}/medication_logs", json=payload)
+    assert response.status_code in [200, 201], f"Error {response.status_code}: {response.text}"
+    medication_id = response.json().get("id")
+    
+    # Actualizar el registro de medicación
+    updated_payload = payload.copy()
+    updated_payload["dose"] = "1000mg"  # Actualizamos la dosis
+    response = requests.put(BASE_URL + f"/{patient_id}/medication_logs/{medication_id}", json=updated_payload)
+    assert response.status_code == 200, f"Error {response.status_code}: {response.text}"
+    assert response.json()["dose"] == "1000mg"
+
+# Test de eliminar paciente
+def test_delete_patient():
+    patient_id = crear_paciente_base()
+    if not patient_id:
+        print("Error al crear paciente. No se puede probar la eliminación.")
+        return
+    response = requests.delete(BASE_URL + f"/patients/{patient_id}")
+    assert response.status_code == 200, f"Error {response.status_code}: {response.text}"
+
+# Test de agregar un registro de higiene
+def test_add_hygiene_log():
+    patient_id = crear_paciente_base()
+    if not patient_id:
+        print("Error al crear paciente. No se puede probar el registro de higiene.")
+        return
+    payload = {
+        "datetime": datetime.now().isoformat(),
+        "type": "Baño",
+        "condition": "Satisfactoria",
+        "status": "completado",
+        "assistance_level": "Ninguna",
+        "observations": "Ninguna"
+    }
+    response = requests.post(BASE_URL + f"/{patient_id}/hygiene_logs", json=payload)
+    assert response.status_code in [200, 201], f"Error {response.status_code}: {response.text}"
+    assert response.json()["type"] == payload["type"]
+
+# Test de obtener registros de higiene
+def test_get_hygiene_logs():
+    patient_id = crear_paciente_base()
+    if not patient_id:
+        print("Error al crear paciente. No se puede probar la obtención de registros de higiene.")
+        return
+    payload = {
+        "datetime": datetime.now().isoformat(),
+        "type": "Baño",
+        "condition": "Excelente",
+        "status": "completado",
+        "assistance_level": "Ninguna",
+        "observations": "Todo en orden"
+    }
+    requests.post(BASE_URL + f"/{patient_id}/hygiene_logs", json=payload)
+    response = requests.get(BASE_URL + f"/{patient_id}/hygiene_logs")
+    assert response.status_code == 200, f"Error {response.status_code}: {response.text}"
+    assert isinstance(response.json(), list)
+
+# Test de agregar registros de signos vitales
+def test_add_vital_signs():
+    patient_id = crear_paciente_base()
+    if not patient_id:
+        print("Error al crear paciente. No se puede probar los signos vitales.")
+        return
+    payload = {
+        "datetime": datetime.now().isoformat(),
+        "daily_weight": 70,
+        "blood_pressure": {"systolic": 120, "diastolic": 80},
+        "heart_rate": 72,
+        "observations": "Todo normal"
+    }
+    response = requests.post(BASE_URL + f"/{patient_id}/vital_signs", json=payload)
+    assert response.status_code in [200, 201], f"Error {response.status_code}: {response.text}"
+    assert response.json()["daily_weight"] == payload["daily_weight"]
+
+# Test de obtener registros de signos vitales
+def test_get_vital_signs():
+    patient_id = crear_paciente_base()
+    if not patient_id:
+        print("Error al crear paciente. No se puede probar la obtención de signos vitales.")
+        return
+    payload = {
+        "datetime": datetime.now().isoformat(),
+        "daily_weight": 75,
+        "blood_pressure": {"systolic": 130, "diastolic": 85},
+        "heart_rate": 70,
+        "observations": "Peso aumentado"
+    }
+    requests.post(BASE_URL + f"/{patient_id}/vital_signs", json=payload)
+    response = requests.get(BASE_URL + f"/{patient_id}/vital_signs")
+    assert response.status_code == 200, f"Error {response.status_code}: {response.text}"
+    assert isinstance(response.json(), list)
+
+# Test de actualizar paciente con datos incorrectos
+def test_actualizar_paciente_con_datos_incorrectos():
+    patient_id = crear_paciente_base()
+    if not patient_id:
+        print("Error al crear paciente. No se puede probar la actualización.")
+        return
+
+    # Intentamos actualizar con datos incompletos o incorrectos
+    payload = {
+        "name": "",  # Nombre vacío es inválido
+        "last_name": "Gómez",
+        "birth_date": "1980-10-10",
+        "age": 41,
+        "document": random.randint(100000000, 999999999),
+        "cholesterol": 200,
+        "glucose": 110,
+        "conditions": ["hipertensión"],
+        "medications": ["enalapril"],
+        "activity_level": "Alto",
+        "caretakers_ids": [],
+        "medical_history": [],
+        "meals": [],
+        "medication_logs": [],
+        "hygiene_logs": [],
+        "vital_signs": [],
+        "symptoms": []
+    }
+    response = requests.put(BASE_URL + f"/{patient_id}", json=payload)  # Cambié a PUT para actualización
+    assert response.status_code == 422, f"Error {response.status_code}: {response.text}"
+
+# Test de eliminar paciente con ID incorrecto
+def test_delete_patient_con_id_incorrecto():
+    incorrect_patient_id = "invalid_id"  # ID inválido
+    response = requests.delete(BASE_URL + f"/patients/{incorrect_patient_id}")  # Cambié a DELETE
+    assert response.status_code == 400, f"Error {response.status_code}: {response.text}"
