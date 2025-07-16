@@ -1,7 +1,10 @@
 import requests
 from datetime import datetime
+import random
+
 
 BASE_URL = "http://127.0.0.1:8000/caretakers"
+
 
 def test_crear_caretaker_exitoso():
     # Utiliza un timestamp para garantizar la unicidad del correo y evitar duplicados

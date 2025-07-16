@@ -1,8 +1,10 @@
 import requests
 from datetime import datetime
 import random
+import pytest
 
 BASE_URL = "http://127.0.0.1:8000/patients"
+
 
 # Crear paciente base para ser reutilizado en múltiples pruebas
 def crear_paciente_base():
@@ -274,7 +276,3 @@ def test_get_vital_signs():
     response = requests.get(BASE_URL + f"/{patient_id}/vital_signs")
     assert response.status_code == 200, f"Error {response.status_code}: {response.text}"
     assert isinstance(response.json(), list)
-
-
-
-
