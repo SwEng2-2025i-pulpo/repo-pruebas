@@ -42,7 +42,8 @@ def run_tests():
     for name, func in test_functions.items():
         try:
             func()
-            results.append((name, "✅ Éxito", ""))
+            details = "Pasó la prueba sin novedad"  # Modificación: agregar mensaje en caso de éxito
+            results.append((name, "✅ Éxito", details))
         except AssertionError as e:
             results.append((name, "❌ Fallo", str(e)))
         except Exception as e:
@@ -116,6 +117,7 @@ def generar_pdf(resultados, path_pdf):
     story.append(tabla)
     story.append(Spacer(1, 20))
 
+    # Gráfico en memoria (no se guarda en disco)
     grafico_buffer = generar_grafico_en_memoria(resultados)
     story.append(Image(grafico_buffer, width=300, height=300))
 

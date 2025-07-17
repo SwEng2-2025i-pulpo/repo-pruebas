@@ -29,7 +29,7 @@ def run_tests():
     for name, func in test_functions.items():
         try:
             func()
-            results.append((name, "✅ Éxito", ""))
+            results.append((name, "✅ Éxito", "Pasó la prueba sin novedad"))  # Detalle agregado en éxito
         except AssertionError as e:
             results.append((name, "❌ Fallo", str(e)))
         except Exception as e:
@@ -110,7 +110,6 @@ def generar_pdf(resultados, path_pdf):
     grafico_buffer = generar_grafico_en_memoria(resultados)
     story.append(Image(grafico_buffer, width=300, height=300))
 
-    # Datos adicionales
     story.append(Spacer(1, 24))
     story.append(Paragraph("Autor del informe: Anderson", styles['Normal']))
     total = len(resultados)
