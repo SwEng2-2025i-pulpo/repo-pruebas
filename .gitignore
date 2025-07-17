@@ -1,0 +1,8 @@
+# Ignorar el entorno virtual venv
+venv/
+
+# Ignorar la carpeta de cypress
+cypress/
+
+# Archivos de dependencias de Node
+node_modules/
