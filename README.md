@@ -39,13 +39,13 @@ Para ejecutar las pruebas y generar un reporte en formato PDF, usa los siguiente
 
 #### **Para los tests de `caretakers`**:
 ```bash
-python .\pruebasbackend-registro-actividades
+python .\pruebasackend-registro-actividades
 un_and_generate_report_caretakers.py
 ```
 
 #### **Para los tests de `patients`**:
 ```bash
-python .\pruebasbackend-registro-actividades
+python .\pruebasackend-registro-actividades
 un_and_generate_report_patients.py
 ```
 
@@ -76,3 +76,16 @@ Los reportes generados en formato PDF contienen los siguientes elementos:
   - **Detalles**: Detalles sobre el resultado. Si la prueba pasó, el detalle dirá "Pasó la prueba sin novedad", y si falló, se incluirán los detalles del error.
 - **Gráfico de resultados**: Un gráfico de pastel que muestra el porcentaje de pruebas exitosas versus las que fallaron.
 - **Conclusión**: Un resumen sobre el número de pruebas exitosas y el estado general del módulo probado.
+
+## 5. **Ejecución de pruebas de backend-generar-pdf**
+
+Para ejecutar las pruebas del servicio de generación de PDF para los endpoints de pacientes, utiliza el siguiente comando:
+
+```bash
+python .\pruebasackend-generar-pdf
+un_and_generate_report_pdf.py
+```
+
+Este script ejecutará los tests y generará un reporte en formato PDF con los resultados de las pruebas realizadas en los endpoints de pacientes. Si todos los tests pasan, se reflejará en el reporte correspondiente con un mensaje de éxito.
+
+---
