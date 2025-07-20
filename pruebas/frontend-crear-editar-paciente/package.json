@@ -1,0 +1,17 @@
+{
+  "name": "frontend-crear-editar-paciente",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pruebas E2E frontend para crear y editar paciente",
+  "scripts": {
+    "cy:open": "cypress open",
+    "cy:run": "cypress run --reporter mochawesome --reporter-options reportDir=cypress/reports,overwrite=false,html=false,json=true"
+  },
+  "devDependencies": {
+    "cypress": "^13.0.0",
+    "cypress-mochawesome-reporter": "^3.8.4",
+    "mochawesome": "^7.1.3",
+    "mochawesome-merge": "^4.4.1",
+    "mochawesome-report-generator": "^6.2.0"
+  }
+}
