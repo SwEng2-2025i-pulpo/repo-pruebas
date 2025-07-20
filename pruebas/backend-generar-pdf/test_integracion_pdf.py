@@ -6,7 +6,7 @@ BASE_URL = "http://127.0.0.1:8001/api/pdf/patient"
 
 def test_generar_pdf_exitoso():
     # ID de paciente válido (reemplázalo con un ID válido de tu base de datos)
-    valid_patient_id = "68746d4d5c6c6470992128b2"  # ID actualizado
+    valid_patient_id = "6871a921d7e09f4bec1f14bb"  # ID actualizado
     
     # Realiza la solicitud GET para obtener el PDF del paciente
     response = requests.get(f"{BASE_URL}/{valid_patient_id}")
@@ -54,7 +54,7 @@ def test_error_interno_servidor():
     # Aquí puedes simular el error modificando la lógica interna del servidor o la base de datos
 
     # Realiza la solicitud GET con un ID válido
-    response = requests.get(f"{BASE_URL}/68746d4d5c6c6470992128b2")  # ID de paciente válido actualizado
+    response = requests.get(f"{BASE_URL}/6871a921d7e09f4bec1f14bb")  # ID de paciente válido actualizado
     
     # Forzar un error en el servidor
     assert response.status_code == 500, f"Error: {response.status_code} - {response.text}"
