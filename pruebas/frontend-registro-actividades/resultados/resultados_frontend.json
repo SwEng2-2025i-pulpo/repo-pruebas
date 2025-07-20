@@ -1,0 +1,24 @@
+{
+  "tests": [
+    {
+      "name": "Registrar Comida - Caso Exito",
+      "status": "passed",
+      "details": "Registrar Comida - Caso Exito Registrar Comida - Caso Exito"
+    },
+    {
+      "name": "Registrar Comida - Casos de Error",
+      "status": "passed",
+      "details": "Registrar Comida - Casos de Error Registrar Comida - Casos de Error"
+    },
+    {
+      "name": "Editar Comida - Caso Exito",
+      "status": "passed",
+      "details": "Registrar y editar comida desde el frontend Editar Comida - Caso Exito"
+    },
+    {
+      "name": "Editar Comida - Casos de Error",
+      "status": "passed",
+      "details": "Registrar comida - casos no ideales (errores) Editar Comida - Casos de Error"
+    }
+  ]
+}

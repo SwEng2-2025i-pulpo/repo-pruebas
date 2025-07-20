@@ -1,0 +1,144 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 2,
+    "passes": 2,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-07-20T03:18:55.817Z",
+    "end": "2025-07-20T03:19:05.756Z",
+    "duration": 9939,
+    "testsRegistered": 2,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "fea81055-f981-422f-a508-cec41f88f1f2",
+      "title": "",
+      "fullFile": "cypress\\e2e\\create.cy.js",
+      "file": "cypress\\e2e\\create.cy.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "8a12fff4-228a-4411-a492-56b5a9268f7f",
+          "title": "Registrar Comida - Caso Exito",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Registrar Comida - Caso Exito",
+              "fullTitle": "Registrar Comida - Caso Exito Registrar Comida - Caso Exito",
+              "timedOut": null,
+              "duration": 5647,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// 1. Ir a la página de login\ncy.visit('http://localhost:5173'); // Cambia el puerto si tu frontend usa otro\n// 2. Completar login\ncy.get('input[type=\"email\"]').type('danielfelipe@gmail.com'); // Cambia por usuario válido\ncy.get('input[type=\"password\"]').type('Millonarios2025*'); // Cambia por contraseña válida\ncy.contains('Ingresar').click();\n// 3. Esperar a que aparezca el home tras login\ncy.contains('Registrar cuidado').should('be.visible');\n// Crear Usuario\ncy.contains('Pacientes').click();\ncy.contains('Crear Paciente').click();\ncy.get('input[placeholder=\"Nombre\"]').type('Juan');\ncy.get('input[placeholder=\"Apellido\"]').type('Pérez');\ncy.get('#birth_date').type('1955-10-21');\ncy.get('input[placeholder=\"Documento\"]').type('52660903');\ncy.contains('Crear Paciente').click();\n// Seleccionar Paciente\ncy.contains('Pacientes').click();\ncy.contains('Elegir').click();\ncy.get('section').contains('Cerrar').should('be.visible').click();\ncy.get('img[alt=\"Logo aplicacion\"]').click();\n// 4. Click en \"Registrar cuidado\"\ncy.contains('Registrar cuidado').click();\n// 5. Seleccionar \"Alimentación\"\ncy.contains('Alimentación').click();\n// 6. Llenar el formulario de alimentación\n// Fecha y hora (usa el formato requerido por tu input)\n// Si el input es type=\"datetime-local\", fuerza el valor:\nconst now = new Date();\nconst yyyy = now.getFullYear();\nconst mm = String(now.getMonth() + 1).padStart(2, '0');\nconst dd = String(now.getDate()).padStart(2, '0');\nconst hh = String(now.getHours()).padStart(2, '0');\nconst min = String(now.getMinutes()).padStart(2, '0');\nconst fechaHora = `${yyyy}-${mm}-${dd}T${hh}:${min}`;\ncy.get('input[type=\"datetime-local\"]').invoke('val', fechaHora).trigger('input');\n// Comida del día (selección)\ncy.get('select').eq(0).select(1); // Selecciona la primera opción distinta a \"Selecciona una comida\"\n// Descripción del alimento consumido\ncy.get('input[placeholder*=\"Descripción alimento\"]').type('Arroz y pollo');\n// Hidratación (selección)\ncy.get('select').eq(1).select(1); // Selecciona la primera opción distinta a \"Selecciona tipo de hidratación\"\n// Observaciones\ncy.get('textarea[placeholder*=\"Observaciones\"]').type('Sin observaciones');\n// 7. Click en \"Enviar\"\ncy.get('button').contains(/^enviar$/i).click();\n// Opcional: puedes agregar screenshots al final\n// cy.screenshot();",
+              "err": {},
+              "uuid": "526dad50-ac07-4642-b08c-58f2810b927a",
+              "parentUUID": "8a12fff4-228a-4411-a492-56b5a9268f7f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "526dad50-ac07-4642-b08c-58f2810b927a"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5647,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        },
+        {
+          "uuid": "98f6dadf-40f6-4892-833e-83d35c679d75",
+          "title": "Registrar Comida - Casos de Error",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Registrar Comida - Casos de Error",
+              "fullTitle": "Registrar Comida - Casos de Error Registrar Comida - Casos de Error",
+              "timedOut": null,
+              "duration": 4223,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// 1. Ir a la página de login\ncy.visit('http://localhost:5173');\n// 2. Completar login\ncy.get('input[type=\"email\"]').type('danielfelipe@gmail.com');\ncy.get('input[type=\"password\"]').type('Millonarios2025*');\ncy.contains('Ingresar').click();\n// 3. Esperar a que aparezca el home tras login\ncy.contains('Registrar cuidado').should('be.visible');\n// Crear Usuario\ncy.contains('Pacientes').click();\ncy.contains('Crear Paciente').click();\ncy.get('input[placeholder=\"Nombre\"]').type('Juan');\ncy.get('input[placeholder=\"Apellido\"]').type('Pérez');\ncy.get('#birth_date').type('1955-10-21');\ncy.get('input[placeholder=\"Documento\"]').type('52660903');\ncy.contains('Crear Paciente').click();\n// Seleccionar Paciente\ncy.contains('Pacientes').click();\ncy.contains('Elegir').click();\ncy.get('section').contains('Cerrar').should('be.visible').click();\ncy.get('img[alt=\"Logo aplicacion\"]').click();\n// 4. Click en \"Registrar cuidado\"\ncy.contains('Registrar cuidado').click();\n// 5. Seleccionar \"Alimentación\"\ncy.contains('Alimentación').click();\n// 6. NO llenar ningún campo, intentar enviar el formulario vacío\ncy.get('button').contains(/^enviar$/i).click();\n// 7. Verificar mensajes de error en los campos requeridos (ajusta los textos según tu app)\ncy.contains(/La fecha y hora son obligatorios/i).should('be.visible');\ncy.contains(/Ingresar el tipo de comida es obligatorio/i).should('be.visible');\ncy.contains(/Ingresar la descripción del alimento es obligatorio/i).should('be.visible');\ncy.contains(/Ingresar la hidratación es obligatorio/i).should('be.visible');\n// 8. (Opcional) Llenar solo un campo y verificar validaciones parciales\ncy.get('input[type=\"datetime-local\"]').invoke('val', '2025-07-20T08:30').trigger('input');\ncy.get('button').contains(/^enviar$/i).click();\ncy.contains(/Ingresar el tipo de comida es obligatorio/i).should('be.visible');\ncy.contains(/Ingresar la descripción del alimento es obligatorio/i).should('be.visible');\ncy.contains(/Ingresar la hidratación es obligatorio/i).should('be.visible');",
+              "err": {},
+              "uuid": "388a4de7-6208-40d2-bc30-791762b1382e",
+              "parentUUID": "98f6dadf-40f6-4892-833e-83d35c679d75",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "388a4de7-6208-40d2-bc30-791762b1382e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 4223,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.2.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": false,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/results",
+        "overwrite": false,
+        "html": false,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}
